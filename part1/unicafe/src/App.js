@@ -4,10 +4,27 @@ const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>;
 
 const Title = ({ title }) => <h2>{title}</h2>;
 
-const Statistics = ({ text, number }) => (
-  <p>
-    {text} {number}
-  </p>
+const Statistics = (props) => (
+  <>
+    <p>
+      {props.good} {props.numberOfGood}
+    </p>
+    <p>
+      {props.neutral} {props.numberOfNeutral}
+    </p>
+    <p>
+      {props.bad} {props.numberOfBad}
+    </p>
+    <p>
+      {props.all} {props.sum}
+    </p>
+    <p>
+      {props.average} {props.avg}
+    </p>
+    <p>
+      {props.positive} {props.positivePercentage}
+    </p>
+  </>
 );
 
 const App = () => {
@@ -41,12 +58,20 @@ const App = () => {
       <Button onClick={handleNeutralClick} text="Neutral" />
       <Button onClick={handleBadClick} text="Bad" />
       <Title title="statistics" />
-      <Statistics text="good" number={good} />
-      <Statistics text="Neutral" number={neutral} />
-      <Statistics text="bad" number={bad} />
-      <Statistics text="all" number={all} />
-      <Statistics text="average" number={average} />
-      <Statistics text="positive" number={`${positive} %`} />
+      <Statistics
+        good="good"
+        neutral="neutral"
+        bad="bad"
+        all="all"
+        average="average"
+        positive="average"
+        numberOfGood={good}
+        numberOfNeutral={neutral}
+        numberOfBad={bad}
+        sum={all}
+        avg={average}
+        positivePercentage={positive}
+      />
     </div>
   );
 };
