@@ -16,6 +16,10 @@ Refactoring the application so that displaying the statistics is extracted into 
 
 Change the application to display statistics only once feedback has been gathered.
 
-# step5
+## step 5
 
 Defining statisticLine component for displaying a single statistic.
+
+## step 6
+
+Display the statistics in an HTML table
