@@ -9,3 +9,15 @@ Header, Content and Total.
 ## step2
 
 Refactoring the Content component so that it does not render any names of parts or their number of exercises by itself. Instead it only renders three Part components of which each renders the name and number of exercises of one part.
+
+## step 3
+
+Modification the variable definitions of the App component
+
+## step 4
+
+Modify the variable definitions of App into object composed of course titlle and an array of parts (name, number of exercises)
+
+## step 5
+
+Change the course and its parts into a single JavaScript object. Fixed everything that breaks

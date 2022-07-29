@@ -4,33 +4,55 @@ const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>;
 
 const Title = ({ title }) => <h2>{title}</h2>;
 
-const Statistics = (props) => (
-  <>
-    <p>
-      {props.good} {props.numberOfGood}
-    </p>
-    <p>
-      {props.neutral} {props.numberOfNeutral}
-    </p>
-    <p>
-      {props.bad} {props.numberOfBad}
-    </p>
-    <p>
-      {props.all} {props.sum}
-    </p>
-    <p>
-      {props.average} {props.avg}
-    </p>
-    <p>
-      {props.positive} {props.positivePercentage}
-    </p>
-  </>
-);
+const Statistics = (props) => {
+  if (props.feedbacks.length === 0) {
+    return <p>No feedback given</p>;
+  }
+
+  return (
+    <>
+      <p>
+        {props.good} {props.numberOfGood}
+      </p>
+      <p>
+        {props.neutral} {props.numberOfNeutral}
+      </p>
+      <p>
+        {props.bad} {props.numberOfBad}
+      </p>
+      <p>
+        {props.all} {props.sum}
+      </p>
+      <p>
+        {props.average} {props.avg}
+      </p>
+      <p>
+        {props.positive} {props.positivePercentage} {"%"}
+      </p>
+    </>
+  );
+};
 
 const App = () => {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
+  const [feedbacks, setAllFeedBacks] = useState([]);
+
+  console.log(feedbacks);
+
+  const handleGoodClick = () => {
+    setGood(good + 1);
+    setAllFeedBacks(feedbacks.concat("G"));
+  };
+  const handleNeutralClick = () => {
+    setNeutral(neutral + 1);
+    setAllFeedBacks(feedbacks.concat("B"));
+  };
+  const handleBadClick = () => {
+    setBad(bad + 1);
+    setAllFeedBacks(feedbacks.concat("N"));
+  };
 
   let all = 0;
   const arr = [good, neutral, bad];
@@ -47,10 +69,6 @@ const App = () => {
 
   let positive = (good / all) * 100;
 
-  const handleGoodClick = () => setGood(good + 1);
-  const handleNeutralClick = () => setNeutral(neutral + 1);
-  const handleBadClick = () => setBad(bad + 1);
-
   return (
     <div>
       <Title title="give feedback" />
@@ -64,13 +82,14 @@ const App = () => {
         bad="bad"
         all="all"
         average="average"
-        positive="average"
+        positive="positive"
         numberOfGood={good}
         numberOfNeutral={neutral}
         numberOfBad={bad}
         sum={all}
         avg={average}
         positivePercentage={positive}
+        feedbacks={feedbacks}
       />
     </div>
   );

@@ -11,3 +11,7 @@ Expand the application so that it shows more statistics about the gathered feedb
 ## Step 3
 
 Refactoring the application so that displaying the statistics is extracted into its own Statistics component
+
+## step 4
+
+Change the application to display statistics only once feedback has been gathered.
