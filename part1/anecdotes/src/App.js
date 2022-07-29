@@ -1,5 +1,17 @@
 import { useState } from "react";
 
+const Title = ({ text }) => <h2>{text}</h2>;
+
+const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>;
+
+const Content = ({ anecdote, votes }) => (
+  <p>
+    {anecdote}
+    <br />
+    has {votes} votes
+  </p>
+);
+
 const App = () => {
   const anecdotes = [
     "If it hurts, do it more often.",
@@ -12,32 +24,46 @@ const App = () => {
   ];
 
   const [selected, setSelected] = useState(0);
-  const [points, setPoints] = useState({
-    0: 0,
-    1: 0,
-    2: 0,
-    3: 0,
-    4: 0,
-    5: 0,
-    6: 0,
-  });
+  const [points, setPoints] = useState(new Uint8Array(anecdotes.length));
   const handleSelectedAnecdotes = () => {
     let random = Math.floor(Math.random() * anecdotes.length);
     setSelected(random);
   };
 
   const handleVotes = () => {
-    const copy = { ...points };
+    const copy = [...points];
     copy[selected] += 1;
     setPoints(copy);
   };
 
+  const allData = [];
+  for (let i = 0; i < anecdotes.length; i++) {
+    allData.push({
+      anecdote: anecdotes[i],
+      votes: points[i],
+    });
+  }
+  let max = -Infinity;
+  let anecdoteMax = "";
+  for (const x of allData) {
+    if (x.votes > max) {
+      max = x.votes;
+      anecdoteMax = x.anecdote;
+    }
+  }
+
+  console.table(allData);
+  console.log(max);
+  console.log(anecdoteMax);
+
   return (
     <div>
-      <p>{anecdotes[selected]}</p>
-      <p>has {points[selected]} votes</p>
-      <button onClick={handleVotes}>votes</button>
-      <button onClick={handleSelectedAnecdotes}>next anecdotes</button>
+      <Title text="Anecdote of the day" />
+      <Content anecdote={anecdotes[selected]} votes={points[selected]} />
+      <Button onClick={handleVotes} text="votes" />
+      <Button onClick={handleSelectedAnecdotes} text="next anecdotes" />
+      <Title text="Anecdote with the most votes" />
+      <Content anecdote={anecdoteMax} votes={max} />
     </div>
   );
 };
