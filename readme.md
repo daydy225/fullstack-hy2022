@@ -6,5 +6,6 @@ This is the file structure for the submission repository of all exercices
 part0
 part1
   courseinfo
- 
+  unicafe
+  anecdotes
 </pre>
