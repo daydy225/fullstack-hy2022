@@ -11,35 +11,27 @@ const Statistics = (props) => {
 
   return (
     <>
-      <p>
-        {props.good} {props.numberOfGood}
-      </p>
-      <p>
-        {props.neutral} {props.numberOfNeutral}
-      </p>
-      <p>
-        {props.bad} {props.numberOfBad}
-      </p>
-      <p>
-        {props.all} {props.sum}
-      </p>
-      <p>
-        {props.average} {props.avg}
-      </p>
-      <p>
-        {props.positive} {props.positivePercentage} {"%"}
-      </p>
+      <StatisticLine text={props.good} value={props.numberOfGood} />
+      <StatisticLine text={props.neutral} value={props.numberOfNeutral} />
+      <StatisticLine text={props.bad} value={props.numberOfBad} />
+      <StatisticLine text={props.all} value={props.sum} />
+      <StatisticLine text={props.average} value={props.avg} />
+      <StatisticLine text={props.positive} value={props.positivePercentage} />
     </>
   );
 };
+
+const StatisticLine = ({ text, value }) => (
+  <p>
+    {text} {value}
+  </p>
+);
 
 const App = () => {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
   const [feedbacks, setAllFeedBacks] = useState([]);
-
-  console.log(feedbacks);
 
   const handleGoodClick = () => {
     setGood(good + 1);
@@ -67,7 +59,7 @@ const App = () => {
   let average =
     (good * score.good + neutral * score.neutral + bad * score.bad) / all;
 
-  let positive = (good / all) * 100;
+  let positive = `${(good / all) * 100} %`;
 
   return (
     <div>
