@@ -21,3 +21,7 @@ Modify the variable definitions of App into object composed of course titlle and
 ## step 5
 
 Change the course and its parts into a single JavaScript object. Fixed everything that breaks
+
+## step 6
+
+Changed the App component and defining a component Course responsible for formatting a single course.
