@@ -15,3 +15,7 @@ Calculation of the sum of the exercices with reduce array method
 ## step 9
 
 Extend theapplication to allow more courses
+
+## step 10
+
+Create a seperate module for the Course component and also adding all subcomponents into the same module.
