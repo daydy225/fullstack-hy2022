@@ -7,3 +7,7 @@ Changed the App component and defining a component Course responsible for format
 ## step 7
 
 Show also the sum of the exercises of the course.
+
+## step 7
+
+Calculation of the sum of the exercices with reduce array method
