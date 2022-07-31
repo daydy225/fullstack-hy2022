@@ -8,4 +8,6 @@ part1
   courseinfo
   unicafe
   anecdotes
+part2
+  courseinfo  
 </pre>
