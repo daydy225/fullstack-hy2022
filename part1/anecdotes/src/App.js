@@ -52,10 +52,6 @@ const App = () => {
     }
   }
 
-  console.table(allData);
-  console.log(max);
-  console.log(anecdoteMax);
-
   return (
     <div>
       <Title text="Anecdote of the day" />

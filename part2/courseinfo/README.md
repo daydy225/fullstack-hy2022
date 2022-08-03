@@ -1,4 +1,4 @@
-# Course Part 2 Information React Exercises
+# Part 2 Course Information React Exercises
 
 ## step 6
 
