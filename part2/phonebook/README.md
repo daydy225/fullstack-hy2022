@@ -11,3 +11,7 @@ Prevent the user from being able to add names that already exist in the phoneboo
 ## step 3
 
 Add phone numbers to the phone book
+
+## step 4
+
+Implement a search field that can be used to filter the list of people by name
