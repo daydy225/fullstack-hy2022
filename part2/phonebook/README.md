@@ -15,3 +15,7 @@ Add phone numbers to the phone book
 ## step 4
 
 Implement a search field that can be used to filter the list of people by name
+
+## step 5
+
+Refactoring the application
