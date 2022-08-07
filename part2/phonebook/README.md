@@ -19,3 +19,7 @@ Implement a search field that can be used to filter the list of people by name
 ## step 5
 
 Refactoring the application
+
+## step 6
+
+Modification of the application such that the initial state of the data is fetched from server using the axios-library and fetching the data fom db.json file using an Effect Hook.
