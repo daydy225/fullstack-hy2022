@@ -10,7 +10,6 @@ const App = () => {
   useEffect(() => {
     axios.get("http://localhost:3001/persons").then((response) => {
       const personsData = response.data;
-      console.log("persons data =>", personsData);
       setPersons(personsData);
     });
   }, []);

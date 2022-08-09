@@ -10,4 +10,6 @@ part1
   anecdotes
 part2
   courseinfo  
+  phonebook
+  dataforcountries
 </pre>
