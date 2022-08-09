@@ -14,12 +14,19 @@ const App = () => {
 
   const handleFindCountries = (event) => setFindCountries(event.target.value);
 
+  const handleShowDetails = (event) =>
+    setFindCountries(event.target.dataset.countryName);
+
   return (
     <div>
       find countries
-      <input onChange={handleFindCountries} />
+      <input value={findCountries} onChange={handleFindCountries} />
       <br />
-      <SearchResult findCountries={findCountries} allCountries={allCountries} />
+      <SearchResult
+        findCountries={findCountries}
+        allCountries={allCountries}
+        handleShowDetails={handleShowDetails}
+      />
     </div>
   );
 };

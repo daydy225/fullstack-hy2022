@@ -1,29 +1,33 @@
-const CountryDetails = ({ name, capipal, area, languages, countryflag }) => {
-  console.log("countryName", name);
-  console.log("capital", area);
-  console.log("languages", languages);
-  console.log("flags", countryflag);
-
+const CountryDetails = ({ name, capital, area, languages, countryflag }) => {
   let languagesArr = [];
   for (const languagekey in languages) {
     languagesArr.push(languagekey);
   }
 
+  let capitals =
+    capital.length > 1
+      ? capital.map((city) => (
+          <span key={city}>
+            {city} {""}
+          </span>
+        ))
+      : capital;
+
   return (
     <>
       <h2>{name}</h2>
       <div>
-        capital {capipal}
+        capital {capitals}
         <br />
         area {area}
       </div>
       <h4>languages:</h4>
       <ul>
         {languagesArr.map((key) => (
-          <li>{languages[key]}</li>
+          <li key={key}>{languages[key]}</li>
         ))}
       </ul>
-      <img src={countryflag} width="150" alt={name} />
+      <img src={countryflag} width="160" alt={name} />
     </>
   );
 };

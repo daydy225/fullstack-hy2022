@@ -1,7 +1,7 @@
 import Country from "./Country";
 import CountryDetails from "./CountryDetails";
 
-const SearchResult = ({ findCountries, allCountries }) => {
+const SearchResult = ({ findCountries, allCountries, handleShowDetails }) => {
   let countries = [...allCountries];
 
   const re = new RegExp(findCountries, "i");
@@ -18,11 +18,11 @@ const SearchResult = ({ findCountries, allCountries }) => {
     let findACountry = countries.find((country) =>
       country.name.common.match(re)
     );
-    console.log("FindAcountry", findACountry);
+
     return (
       <CountryDetails
         name={findACountry.name.common}
-        capipal={findACountry.capipal}
+        capital={findACountry.capital}
         area={findACountry.area}
         languages={findACountry.languages}
         countryflag={findACountry.flags.png}
@@ -31,7 +31,12 @@ const SearchResult = ({ findCountries, allCountries }) => {
   }
 
   return searchResult.map((country) => (
-    <Country key={country} countryName={country} />
+    <Country
+      key={country}
+      countryName={country}
+      findCountries={findCountries}
+      handleShowDetails={handleShowDetails}
+    />
   ));
 };
 
