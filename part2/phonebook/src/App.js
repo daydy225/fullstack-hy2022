@@ -1,53 +1,58 @@
-import Filter from "./components/Filter";
-import PersonForm from "./components/PersonForm";
-import Persons from "./components/Persons";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import Filter from './components/Filter'
+import PersonForm from './components/PersonForm'
+import Persons from './components/Persons'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
 const App = () => {
-  const [persons, setPersons] = useState([]);
+  const [persons, setPersons] = useState([])
 
   useEffect(() => {
-    axios.get("http://localhost:3001/persons").then((response) => {
-      const personsData = response.data;
-      setPersons(personsData);
-    });
-  }, []);
+    axios.get('http://localhost:3001/persons').then(response => {})
+  }, [])
 
-  const [newName, setNewName] = useState("");
-  const [newNumber, setNewNumber] = useState("");
-  const [filterText, setFilterText] = useState("");
+  const [newName, setNewName] = useState('')
+  const [newNumber, setNewNumber] = useState('')
+  const [filterText, setFilterText] = useState('')
 
-  const handleAddPerson = (event) => {
-    event.preventDefault();
-    let newPerson = [...persons];
-    let personName = newPerson.map((person) => person.name);
-    let personNumber = newPerson.map((person) => person.number);
+  const handleAddPerson = event => {
+    event.preventDefault()
+    let newPerson = [...persons]
+    let personName = newPerson.map(person => person.name)
+    let personNumber = newPerson.map(person => person.number)
 
     if (!personName.includes(newName) && !personNumber.includes(newNumber)) {
-      newPerson = newPerson.concat({
-        name: newName,
-        number: newNumber,
-        id: newPerson.length + 1,
-      });
-      setPersons(newPerson);
+      if (newName !== '' && newNumber !== '') {
+        let newPersonObj = {
+          name: newName,
+          number: newNumber,
+          id: newPerson.length + 1,
+        }
+        axios
+          .post('http://localhost:3001/persons', newPersonObj)
+          .then(response => {
+            setPersons(newPerson.concat(response.data))
+          })
+      } else {
+        alert(`Fields are required`)
+      }
     } else {
-      alert(`${newName} is already added to phonebook`);
+      alert(`${newName} is already added to phonebook`)
     }
-  };
+  }
 
-  const handleNameChange = (event) => setNewName(event.target.value);
+  const handleNameChange = event => setNewName(event.target.value)
 
-  const handleNumberChange = (event) => setNewNumber(event.target.value);
-  const handleFilterText = (event) => setFilterText(event.target.value);
+  const handleNumberChange = event => setNewNumber(event.target.value)
+  const handleFilterText = event => setFilterText(event.target.value)
 
-  const re = new RegExp(filterText, "i");
+  const re = new RegExp(filterText, 'i')
 
   let filterList =
-    filterText === ""
+    filterText === ''
       ? persons
-      : persons.filter((person) => person.name.match(re));
-  console.log(filterList);
+      : persons.filter(person => person.name.match(re))
+  console.log(filterList)
 
   return (
     <div>
@@ -62,11 +67,11 @@ const App = () => {
         onSubmit={handleAddPerson}
       />
       <h3>Numbers</h3>
-      {filterList.map((person) => (
+      {filterList.map(person => (
         <Persons key={person.id} name={person.name} number={person.number} />
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App
