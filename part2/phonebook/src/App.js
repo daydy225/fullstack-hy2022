@@ -1,14 +1,14 @@
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
+import phonebookService from './service/phonebookService'
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 
 const App = () => {
   const [persons, setPersons] = useState([])
 
   useEffect(() => {
-    axios.get('http://localhost:3001/persons').then(response => {})
+    phonebookService.getAllNumbers().then(allNulbers => setPersons(allNulbers))
   }, [])
 
   const [newName, setNewName] = useState('')
@@ -28,11 +28,9 @@ const App = () => {
           number: newNumber,
           id: newPerson.length + 1,
         }
-        axios
-          .post('http://localhost:3001/persons', newPersonObj)
-          .then(response => {
-            setPersons(newPerson.concat(response.data))
-          })
+        phonebookService.addNewNumber(newPersonObj).then(numberAdded => {
+          setPersons(newPerson.concat(numberAdded))
+        })
       } else {
         alert(`Fields are required`)
       }
@@ -52,7 +50,6 @@ const App = () => {
     filterText === ''
       ? persons
       : persons.filter(person => person.name.match(re))
-  console.log(filterList)
 
   return (
     <div>

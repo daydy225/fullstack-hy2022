@@ -2,7 +2,7 @@
 
 ## step 1
 
-Implementing the additin of a person to phonebook
+Implementing the additin of a person to phonebook.
 
 ## step 2
 
@@ -10,11 +10,11 @@ Prevent the user from being able to add names that already exist in the phoneboo
 
 ## step 3
 
-Add phone numbers to the phone book
+Add phone numbers to the phone book.
 
 ## step 4
 
-Implement a search field that can be used to filter the list of people by name
+Implement a search field that can be used to filter the list of people by name.
 
 ## step 5
 
@@ -26,4 +26,8 @@ Modification of the application such that the initial state of the data is fetch
 
 ## step 7
 
-Save the numbers that are added to the phonebook to the json-server backend
+Save the numbers that are added to the phonebook to the json-server backend.
+
+## step 8
+
+Extract the code that handles the communication with the backend into its own module.
