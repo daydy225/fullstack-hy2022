@@ -11,4 +11,4 @@ Improve on the application in the previous step, such that when the names of mul
 
 ## step 3
 
-Add to the view showing the data of a single country, the weather report for the capital of that country.
+Add to the view showing the data of a single country, the weather report for the capital of that country. The weather API is https://openweathermap.org
