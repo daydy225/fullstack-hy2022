@@ -16,7 +16,7 @@ const App = () => {
   useEffect(() => {
     const api_key = process.env.REACT_APP_WEATHER_API_KEY;
     const re = new RegExp(findCountries, "i");
-    // let cityName = "";
+
     if (findCountries.length >= 3) {
       let [cityName] = allCountries
         .filter((country) => country.name.common.match(re))
