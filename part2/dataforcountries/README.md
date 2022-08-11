@@ -8,3 +8,7 @@ The application get the data from the endpoint https://restcountries.com/v3.1/al
 ## step 2
 
 Improve on the application in the previous step, such that when the names of multiple countries are shown on the page there is a button next to the name of the country, which when pressed shows the view for that country
+
+## step 3
+
+Add to the view showing the data of a single country, the weather report for the capital of that country.

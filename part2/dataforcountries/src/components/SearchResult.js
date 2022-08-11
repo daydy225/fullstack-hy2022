@@ -1,7 +1,12 @@
 import Country from "./Country";
 import CountryDetails from "./CountryDetails";
 
-const SearchResult = ({ findCountries, allCountries, handleShowDetails }) => {
+const SearchResult = ({
+  findCountries,
+  allCountries,
+  handleShowDetails,
+  weatherData,
+}) => {
   let countries = [...allCountries];
 
   const re = new RegExp(findCountries, "i");
@@ -11,7 +16,7 @@ const SearchResult = ({ findCountries, allCountries, handleShowDetails }) => {
     .filter((name) => name.match(re));
 
   if (searchResult.length > 10) {
-    return <span>Too many matches, specify another filter</span>;
+    return <div>Too many matches, specify another filter</div>;
   }
 
   if (searchResult.length === 1) {
@@ -22,10 +27,11 @@ const SearchResult = ({ findCountries, allCountries, handleShowDetails }) => {
     return (
       <CountryDetails
         name={findACountry.name.common}
-        capital={findACountry.capital}
+        capital={findACountry.capital[0]}
         area={findACountry.area}
         languages={findACountry.languages}
         countryflag={findACountry.flags.png}
+        weatherData={weatherData}
       />
     );
   }

@@ -1,8 +1,4 @@
-const ShowDetailsButton = ({ text, handleShowDetails, countryName }) => (
-  <button onClick={handleShowDetails} data-country-name={countryName}>
-    {text}
-  </button>
-);
+import ShowDetailsButton from "./ShowDetailsButton";
 
 const Country = ({ countryName, handleShowDetails }) => {
   return (

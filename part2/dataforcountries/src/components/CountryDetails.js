@@ -1,23 +1,23 @@
-const CountryDetails = ({ name, capital, area, languages, countryflag }) => {
+import CapitalWeather from "./CapitalWeather";
+
+const CountryDetails = ({
+  name,
+  capital,
+  area,
+  languages,
+  countryflag,
+  weatherData,
+}) => {
   let languagesArr = [];
   for (const languagekey in languages) {
     languagesArr.push(languagekey);
   }
 
-  let capitals =
-    capital.length > 1
-      ? capital.map((city) => (
-          <span key={city}>
-            {city} {""}
-          </span>
-        ))
-      : capital;
-
   return (
     <>
       <h2>{name}</h2>
       <div>
-        capital {capitals}
+        capital {capital}
         <br />
         area {area}
       </div>
@@ -28,6 +28,8 @@ const CountryDetails = ({ name, capital, area, languages, countryflag }) => {
         ))}
       </ul>
       <img src={countryflag} width="160" alt={name} />
+      <h3>Weather in {capital}</h3>
+      <CapitalWeather weatherData={weatherData} />
     </>
   );
 };
