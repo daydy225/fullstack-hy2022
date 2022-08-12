@@ -31,3 +31,7 @@ Save the numbers that are added to the phonebook to the json-server backend.
 ## step 8
 
 Extract the code that handles the communication with the backend into its own module.
+
+## step 9
+
+Make the possibility to delete person entries from the phonebook.

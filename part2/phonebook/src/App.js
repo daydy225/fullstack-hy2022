@@ -3,6 +3,7 @@ import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
 import phonebookService from './service/phonebookService'
 import { useState, useEffect } from 'react'
+import axios from 'axios'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -28,11 +29,14 @@ const App = () => {
           number: newNumber,
           id: newPerson.length + 1,
         }
-        phonebookService.addNewNumber(newPersonObj).then(numberAdded => {
-          setPersons(newPerson.concat(numberAdded))
-        })
+        phonebookService
+          .addNewNumber(newPersonObj)
+          .then(numberAdded => {
+            setPersons(newPerson.concat(numberAdded))
+          })
+          .catch(error => alert(`error message: ${error.message}`))
       } else {
-        alert(`Fields are required`)
+        alert(`All fields are required`)
       }
     } else {
       alert(`${newName} is already added to phonebook`)
@@ -43,6 +47,18 @@ const App = () => {
 
   const handleNumberChange = event => setNewNumber(event.target.value)
   const handleFilterText = event => setFilterText(event.target.value)
+
+  const deleteNumberOf = id => {
+    let numberToDelete = persons.find(num => num.id === id)
+    let { name } = numberToDelete
+    if (window.confirm(`Delete ${name} ?`)) {
+      phonebookService
+        .deleteNumber(id)
+        .catch(error => alert(`error message: ${error.message}`))
+
+      setPersons(persons.filter(person => person.id !== id))
+    }
+  }
 
   const re = new RegExp(filterText, 'i')
 
@@ -65,7 +81,12 @@ const App = () => {
       />
       <h3>Numbers</h3>
       {filterList.map(person => (
-        <Persons key={person.id} name={person.name} number={person.number} />
+        <Persons
+          key={person.id}
+          name={person.name}
+          number={person.number}
+          handleDeleteNumber={() => deleteNumberOf(person.id)}
+        />
       ))}
     </div>
   )

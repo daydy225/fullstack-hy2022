@@ -11,9 +11,15 @@ const addNewNumber = newPersonObj => {
   return request.then(response => response.data)
 }
 
+const deleteNumber = id => {
+  const request = axios.delete(`${baseUrl}/${id}`)
+  return request
+}
+
 const phonebookService = {
   getAllNumbers,
   addNewNumber,
+  deleteNumber,
 }
 
 export default phonebookService
