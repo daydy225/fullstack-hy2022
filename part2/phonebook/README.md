@@ -35,3 +35,7 @@ Extract the code that handles the communication with the backend into its own mo
 ## step 9
 
 Make the possibility to delete person entries from the phonebook.
+
+## step 10
+
+Change the functionality so that if a number is added to an already existing user, the new number will replace the old number.

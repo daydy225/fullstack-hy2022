@@ -3,13 +3,12 @@ import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
 import phonebookService from './service/phonebookService'
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 
 const App = () => {
   const [persons, setPersons] = useState([])
 
   useEffect(() => {
-    phonebookService.getAllNumbers().then(allNulbers => setPersons(allNulbers))
+    phonebookService.getAllNumbers().then(allNumbers => setPersons(allNumbers))
   }, [])
 
   const [newName, setNewName] = useState('')
@@ -23,23 +22,22 @@ const App = () => {
     let personNumber = newPerson.map(person => person.number)
 
     if (!personName.includes(newName) && !personNumber.includes(newNumber)) {
-      if (newName !== '' && newNumber !== '') {
-        let newPersonObj = {
-          name: newName,
-          number: newNumber,
-          id: newPerson.length + 1,
-        }
-        phonebookService
-          .addNewNumber(newPersonObj)
-          .then(numberAdded => {
-            setPersons(newPerson.concat(numberAdded))
-          })
-          .catch(error => alert(`error message: ${error.message}`))
+      if (newName !== '') {
+        addNewNumber(newPerson)
       } else {
         alert(`All fields are required`)
       }
     } else {
-      alert(`${newName} is already added to phonebook`)
+      if (newName === '')
+        return alert(`name should be added first to phonebook`)
+
+      if (
+        window.confirm(
+          `${newName} is already added to phonebook, replace the old with a new one ?`
+        )
+      ) {
+        updateNumber()
+      }
     }
   }
 
@@ -48,6 +46,37 @@ const App = () => {
   const handleNumberChange = event => setNewNumber(event.target.value)
   const handleFilterText = event => setFilterText(event.target.value)
 
+  const addNewNumber = newPerson => {
+    let newPersonObj = {
+      name: newName,
+      number: newNumber,
+      id: newPerson.length + 1,
+    }
+    phonebookService
+      .addNewNumber(newPersonObj)
+      .then(numberAdded => {
+        setPersons(newPerson.concat(numberAdded))
+      })
+      .catch(error => alert(`error message: ${error.message}`))
+  }
+
+  const updateNumber = () => {
+    let personsNumbers = [...persons]
+
+    const personNumToChange = personsNumbers.find(
+      person => person.name === newName
+    )
+    const { id } = personNumToChange
+    const changedNumber = { ...personNumToChange, number: newNumber }
+    phonebookService
+      .updateNumber(id, changedNumber)
+      .then(updatedNumber => {
+        const indexOfNum = personsNumbers.indexOf(personNumToChange)
+        personsNumbers.splice(indexOfNum, 1, updatedNumber)
+        setPersons(personsNumbers)
+      })
+      .catch(error => alert(`error message: ${error.message}`))
+  }
   const deleteNumberOf = id => {
     let numberToDelete = persons.find(num => num.id === id)
     let { name } = numberToDelete
