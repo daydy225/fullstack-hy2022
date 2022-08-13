@@ -1,7 +1,10 @@
-const Filter = ({ filterText, handleFilterText }) => (
-  <div>
-    filter shown with <input value={filterText} onChange={handleFilterText} />
-  </div>
-);
+const Filter = ({ value, handleChange }) => {
+  return (
+    <>
+      Filter shown with
+      <input value={value} onChange={handleChange} />
+    </>
+  )
+}
 
-export default Filter;
+export default Filter
