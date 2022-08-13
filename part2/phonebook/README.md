@@ -39,3 +39,7 @@ Make the possibility to delete person entries from the phonebook.
 ## step 10
 
 Change the functionality so that if a number is added to an already existing user, the new number will replace the old number.
+
+## step 11
+
+Show a notification that lasts for a few seconds after a successful operation is executed (a person is added or a number is changed).

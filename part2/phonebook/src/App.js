@@ -2,18 +2,20 @@ import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
 import phonebookService from './service/phonebookService'
+import Notification from './components/Notification'
 import { useState, useEffect } from 'react'
 
 const App = () => {
   const [persons, setPersons] = useState([])
 
-  useEffect(() => {
-    phonebookService.getAllNumbers().then(allNumbers => setPersons(allNumbers))
-  }, [])
-
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filterText, setFilterText] = useState('')
+  const [sucessMessage, setSuccessMessage] = useState('')
+
+  useEffect(() => {
+    phonebookService.getAllNumbers().then(allNumbers => setPersons(allNumbers))
+  }, [])
 
   const handleAddPerson = event => {
     event.preventDefault()
@@ -56,8 +58,15 @@ const App = () => {
       .addNewNumber(newPersonObj)
       .then(numberAdded => {
         setPersons(newPerson.concat(numberAdded))
+        setSuccessMessage(`Added ${newName}`)
+        setTimeout(() => {
+          setSuccessMessage(null)
+        }, 5000)
       })
       .catch(error => alert(`error message: ${error.message}`))
+
+    setNewName('')
+    setNewNumber('')
   }
 
   const updateNumber = () => {
@@ -74,6 +83,10 @@ const App = () => {
         const indexOfNum = personsNumbers.indexOf(personNumToChange)
         personsNumbers.splice(indexOfNum, 1, updatedNumber)
         setPersons(personsNumbers)
+        setSuccessMessage(`Updated ${newName}`)
+        setTimeout(() => {
+          setSuccessMessage(null)
+        }, 5000)
       })
       .catch(error => alert(`error message: ${error.message}`))
   }
@@ -99,6 +112,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={sucessMessage} />
       <Filter filterText={filterText} handleFilterText={handleFilterText} />
       <h3>add a new</h3>
       <PersonForm

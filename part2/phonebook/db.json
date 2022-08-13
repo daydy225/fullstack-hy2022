@@ -27,7 +27,7 @@
     },
     {
       "name": "Raheem Sterling",
-      "number": "34-4566766774",
+      "number": "34-456644774",
       "id": 6
     },
     {
@@ -39,6 +39,16 @@
       "name": "Carney Chukuemeka",
       "number": "34-34455555333",
       "id": 8
+    },
+    {
+      "name": "Pierre Aubameyang",
+      "number": "54-989-0000",
+      "id": 9
+    },
+    {
+      "name": "Wesley Fofana",
+      "number": "45-44-787998",
+      "id": 10
     }
   ]
 }
