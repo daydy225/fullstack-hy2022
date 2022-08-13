@@ -43,3 +43,7 @@ Change the functionality so that if a number is added to an already existing use
 ## step 11
 
 Show a notification that lasts for a few seconds after a successful operation is executed (a person is added or a number is changed).
+
+## step 12
+
+Fix the issue so that we see an error message in the application when user try to modify a number that was already been deleted.

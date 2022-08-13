@@ -2,7 +2,8 @@ import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
 import phonebookService from './service/phonebookService'
-import Notification from './components/Notification'
+import SucessMessage from './components/SucessMessage'
+import ErrorMessage from './components/ErrorMessage'
 import { useState, useEffect } from 'react'
 
 const App = () => {
@@ -12,6 +13,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [filterText, setFilterText] = useState('')
   const [sucessMessage, setSuccessMessage] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
 
   useEffect(() => {
     phonebookService.getAllNumbers().then(allNumbers => setPersons(allNumbers))
@@ -83,12 +85,21 @@ const App = () => {
         const indexOfNum = personsNumbers.indexOf(personNumToChange)
         personsNumbers.splice(indexOfNum, 1, updatedNumber)
         setPersons(personsNumbers)
-        setSuccessMessage(`Updated ${newName}`)
+        setNewName('')
+        setNewNumber('')
+        setSuccessMessage(`Updated ${personNumToChange.name}`)
         setTimeout(() => {
           setSuccessMessage(null)
         }, 5000)
       })
-      .catch(error => alert(`error message: ${error.message}`))
+      .catch(error => {
+        setErrorMessage(
+          `Information of ${personNumToChange.name} has already been removed from server`
+        )
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 5000)
+      })
   }
   const deleteNumberOf = id => {
     let numberToDelete = persons.find(num => num.id === id)
@@ -112,7 +123,8 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification message={sucessMessage} />
+      <SucessMessage message={sucessMessage} />
+      <ErrorMessage message={errorMessage} />
       <Filter filterText={filterText} handleFilterText={handleFilterText} />
       <h3>add a new</h3>
       <PersonForm
