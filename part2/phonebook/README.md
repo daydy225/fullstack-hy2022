@@ -47,3 +47,7 @@ Show a notification that lasts for a few seconds after a successful operation is
 ## step 12
 
 Fix the issue so that we see an error message in the application when user try to modify a number that was already been deleted.
+
+## step 13
+
+update phonebook frontend to make sure it work locally with the backend
